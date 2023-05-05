@@ -101,7 +101,7 @@ In the following, the typical steps for implementing push notifications, i.e., p
 
 1.  **Get Permission**: To handle push notifications in a PWA, the browser must support service workers and the PushManager interface, which is responsible for subscribing to and unsubscribing from push notifications. Once both requirements are fulfilled, the PWA must then request and obtain permission from the user to send push notifications. This is typically done using a prompt with a button that triggers the `Notification.requestPermission()` method from the Notifications API.
 2.  **Subscribe to push notifications**: After the user has opted in to receive push notifications, we can now subscribe the user by calling the `registration.pushManager.subscribe()` method within the service worker file. Upon successful registration, a `Push Subscription` object (see Listing E) is returned that now needs to be stored in the backend.
-3.        ```javascript
+3.          ```javascript
 
     {
     "endpoint": "https://some.pushservice.com/something-unique",
@@ -117,7 +117,7 @@ In the following, the typical steps for implementing push notifications, i.e., p
 
 4.  **Send push notifications**: To send push notifications to a user's device, the web app needs to make a request to the push service that the user is subscribed to. This is also known as the **web push protocol request**, which is usually send from your server. The request itself includes the message, client as well as delivery configurations (e.g., stop attempting to deliver message after 5 minutes). Afterwards, the push service receives and authenticates the request and sends the push message to the appropriate client.
 5.  **Receive and display push notifications**: Push services queue requests until the client is online and the message is delivered or expired. When the client's browser receives a push notification, it decrypts the message and triggers a push event in the service worker. Therefore, a corresponding event handler must be set up in the application code to handle the event, which can be done with the `addEventListener()` method illustrated in Listing w.
-6.        ```javascript
+6.          ```javascript
 
     self.addEventListener("push", (event) => {
     const payload = event.data?.text() ?? "no payload";
