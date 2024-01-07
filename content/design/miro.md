@@ -3,7 +3,7 @@ title: Miro
 homepage: https://miro.com
 ---
 
-#proprietary
+#proprietary #whiteboard #mockup
 
 # What is Miro?
 
