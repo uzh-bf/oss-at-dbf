@@ -1,6 +1,6 @@
 ---
 title: Introduction to Github Actions
-date: 26.04.2023
+date: 2023-04-26
 author: Bulin Shaqiri
 ---
 
