@@ -1,6 +1,9 @@
 ---
 title: Welcome to Quartz
 ---
+# Projects
+[[automated-grading]]
+[[design-system]]
+[[gbl-uzh]]
+[[klicker-uzh]]
 
-This is a blank Quartz installation.
-See the [documentation](https://quartz.jzhao.xyz) for how to get started.
