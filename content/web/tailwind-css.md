@@ -6,4 +6,3 @@ homepage: https://tailwindcss.com/
 
 - https://tailwindcss.com/
 - https://tailwindui.com/
-- 
