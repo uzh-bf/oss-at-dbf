@@ -12,7 +12,7 @@ homepage: https://www.langchain.com/
 > - **Are context-aware**: connect a language model to sources of context (prompt instructions, few shot examples, content to ground its response in, etc.)
 > - **Reason**: rely on a language model to reason (about how to answer based on provided context, what actions to take, etc.)
 >
-> \_Source: https://python.langchain.com/docs/get_started/introduction
+> Source: https://python.langchain.com/docs/get_started/introduction
 
 # Examples
 

@@ -17,7 +17,7 @@ title: Infrastructure as Code (IaC)
 >
 > Tools like [[terraform]], [[pulumi]], AWS CloudFormation, Ansible, Puppet, and Chef are commonly used for implementing Infrastructure as Code.
 >
-> _Source: GPT-4_
+> Source: GPT-4
 
 # Tools
 
