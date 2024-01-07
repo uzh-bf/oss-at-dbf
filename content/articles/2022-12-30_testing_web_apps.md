@@ -3,9 +3,11 @@ title: Testing Web Applications
 date: 2022-12-30
 author: Jonas Gebel
 ---
+
 # Testing Web Applications (Automated UI Testing, Integration Tests, Github Actions)
 
 https://api.cast.switch.ch/p/106/sp/10600/embedIframeJs/uiconf_id/23448425/partner_id/106?iframeembed=true&playerId=kaltura_player&entry_id=0_3qfyc54d&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=de&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=0_4t7a7k9w
+
 # Motivation and Goals
 
 End-to-end testing is a technique that tests the entire software product from beginning to end to ensure the application flow behaves as expected. It defines the product’s system dependencies and ensures all integrated pieces work together as expected.
@@ -17,11 +19,13 @@ Software systems nowadays are complex and interconnected with numerous subsystem
 In our case, E2E testing should help to simplify the whole testing process of the applications and automate it. That way, once the process is implemented, developers can focus on building without having to pay too much attention on testing.
 
 Cypress offers a simple and understandable way of implementing an automation process into any application. The process can be integrated into Github, which makes the whole process automated.
+
 ## Github Actions
 
 The automated testing process can be integrated into Github via Github actions. These are `.yml` files which contain all the requirements for the application to run and to be tested by Cypress. The challenge is to configure the `.yml` file in a way that all necessary parts of the application are defined and built if necessary (for example seeding the database) so that Cypress can then start the test suite.
 
 The goal is that with every commit to a specified branch, Github actions triggers the whole test suite and runs it. This way, developers can continue building their application, while the tests run in the background.
+
 # Setup and usage
 
 ## Setup test environment
@@ -35,6 +39,7 @@ With Cypress Desktop: `npx cypress open`
 In headless mode: `npx cypress run`
 Default browser is Electron. To change that: `npx cypress run --browser firefox/chrome`
 Run only one file in headless mode: `npx cypress run --spec "path/to/file"`
+
 # Cypress Cloud
 
 _Cypress_ _Cloud is our enterprise-ready, web-based companion to the Cypress app. It gives you online access to your recorded test results, orchestrates test runs across multiple machines, provides rich analytics and diagnostics, and integrates those insights with your favourite tools._
@@ -56,6 +61,7 @@ Screenshots will be taken for each failed attempt. For videos you can delete vid
 If you are using Cypress Cloud, information related to test retries is displayed on the Test Results tab for a run. Selecting the Flaky filter will show tests that retried and then passed during the run.
 
 Find the well written documentation here: [https://docs.cypress.io/guides/guides/test-retries#What-you-ll-learn](https://docs.cypress.io/guides/guides/test-retries#What-you-ll-learn
+
 # Cypress Plugins
 
 ### Cypress testing library
@@ -63,6 +69,7 @@ Find the well written documentation here: [https://docs.cypress.io/guides/guides
 An originally extern library that got verified by the Cypress team. Offers additional commands for your tests. Mostly used to find elements in different ways, for example via text.
 
 Link: [https://github.com/testing-library/cypress-testing-library](https://github.com/testing-library/cypress-testing-library)
+
 # Add data-cy attribute
 
 Before writing tests, so-called `data-cy` attributes need to be added to your components in order for them to be usable by Cypress. Why using this attribute is recommended and other options is described [here](https://docs.cypress.io/guides/references/best-practices#Selecting-Elements).
@@ -76,17 +83,19 @@ Elements which use `data-cy`: Image, Field, div, FastField, FormikTextField, tex
 
 Elements which use `data={{ cy: '`_`name`_`' }}`: Button,
 
-Neither ➝ needs data\_cy as Prop (manually added to the component): ContentInput
+Neither ➝ needs data_cy as Prop (manually added to the component): ContentInput
+
 # Write Tests
 
 Every test should be placed in a file called _`descriptive-name`_`.cy.ts` . These files need to be placed in the folder structure, which is automatically generated when installing Cypress. When running the tests, all files with the ending `.cy.ts` will be run automatically, as long as no specific files are targeted.
+
 ### General Structure
 
 Each test file should have the following basic structure:
 
 ![](https://t4648007.p.clickup-attachments.com/t4648007/5a5a9b35-80a4-41a8-8ab9-1d5009140bbd/Screenshot%202022-12-28%20at%2014.29.48.png)
 
-*   `describe` marks the beginning of the test suite in that file and the outer function containing each single test. It is possible to have more than one `describe` function per file, but since it serves as one test suite it is recommended to only use one of them per file.
+- `describe` marks the beginning of the test suite in that file and the outer function containing each single test. It is possible to have more than one `describe` function per file, but since it serves as one test suite it is recommended to only use one of them per file.
 
 ### BeforeEach Hook
 
@@ -94,7 +103,7 @@ This hook can be used to store some general commands that should be run before e
 
 ![](https://t4648007.p.clickup-attachments.com/t4648007/11eb7a21-ae97-4278-a0e9-2c0725320b75/Screenshot%202022-12-28%20at%2014.38.04.png)
 
-*   This allows us to login into the account of the lecturer before each single test, which makes the code in each single test a little bit smaller.
+- This allows us to login into the account of the lecturer before each single test, which makes the code in each single test a little bit smaller.
 
 ### Single Test
 
@@ -102,7 +111,7 @@ Each test should only target a single workflow and not depend on other tests. Th
 
 This is how a single test could look like:![](https://t4648007.p.clickup-attachments.com/t4648007/ab8cd131-22e7-403c-8640-b847b69f2195/Screenshot%202022-12-28%20at%2014.41.17.png)
 
-*   The test is broken up into two parts. First the workflow we need to perform (First two commands) and then some checks (Last commands) to evaluate if we reached the wanted screen or output after executing the workflow.
+- The test is broken up into two parts. First the workflow we need to perform (First two commands) and then some checks (Last commands) to evaluate if we reached the wanted screen or output after executing the workflow.
 
 A list of the most important commands used in the tests can be found in `Cypress Commands`.
 
@@ -111,6 +120,7 @@ All shown examples are form the Klicker code.
 # General commands
 
 The following commands are generally used to find elements in your DOM.
+
 ## cy.get()
 
 Detailed description [here](https://docs.cypress.io/api/commands/get).
@@ -122,6 +132,7 @@ This is the most commonly used command and allows you to find any element in you
 After the element is found you can perform actions on it by chaining other commands, for example `click()` or `type()` (Further details below).
 
 If this command is able to find multiple elements (which it can do!) you can further select them by chaining `eq()`(Further details below).
+
 ## cy.findByText()
 
 Detailed description [here](https://testing-library.com/docs/queries/bytext).
@@ -137,6 +148,7 @@ The following is an example, where we want to write text into an input field. Si
 Be wary that this function only finds the **exact** text in the DOM. So if you are searching for the text "The text you want to find" with this query: `cy.findByText('The text you')`
 
 Cypress won't find any elements.
+
 ## cy.findAllByText()
 
 Detailed description [here](https://testing-library.com/docs/queries/bytext).
@@ -146,6 +158,7 @@ In case there are multiple texts of the same kind you have to use this function 
 Apart from that all the rules from `cy.findByText()` apply also to this function. Additionally, you get not a single elements but an array of elements back. This means you can't directly perform a `click()` or `type()` action on this array, but must select one element from the array first with the `eq()` command (Further details below).
 
 `cy.findAllByText('The text you want to find').eq(1).click();`
+
 ## .children() / .parents() / .siblings()
 
 Detailed description [here](https://docs.cypress.io/api/commands/children), [here](https://docs.cypress.io/api/commands/parents) and [here](https://docs.cypress.io/api/commands/siblings).
@@ -161,6 +174,7 @@ _Important_:
 `parent()` only yields one element (and only works if one parent element exists). Thus, no eq() chain is necessary.
 
 `cy.findByText(questionTitle).parent().click();`
+
 ## .eq()
 
 Detailed description [here](https://docs.cypress.io/api/commands/eq).
@@ -170,9 +184,11 @@ Whenever multiple elements are yielded by `get()`, `findAllByText()`, `parents()
 `cy.get('[data-cy="select-question-type-div"]').children().eq(1).click();`
 
 The components are counted in a top-down manner, which is why, although `eq()` is really powerful, it should be avoided if possible. Any changes to the DOM that swap elements around will lead to a failing test, unless the index numbers for `eq()` are also changed.
+
 # Workflow commands
 
 Almost every line in your code needs one of this commands, since most actions are performed using a click or typing in fields.
+
 ## .click()
 
 Detailed description [here](https://docs.cypress.io/api/commands/click).
@@ -182,6 +198,7 @@ Detailed description [here](https://docs.cypress.io/api/commands/click).
 `cy.get('[data-cy="`_`data-cy-attribute-name`_`"]').click();`
 
 Remember that buttons don't take `data-cy`, but `data={{ cy: '`_`name`_`' }}` as an attribute.
+
 ## .type()
 
 Detailed description [here](https://docs.cypress.io/api/commands/type).
@@ -189,9 +206,11 @@ Detailed description [here](https://docs.cypress.io/api/commands/type).
 Any text fields can be filled with `type()`.
 
 `cy.get('[data-cy="`_`data-cy-attribute-name`_`"]').type('Any text?);`
+
 # Check commands
 
 These commands are generally used when checking for the right state of the DOM at the end of a test. However, it can happen that these commands need to be used during the workflow part of a test to access certain components.
+
 ## .should()
 
 Detailed description [here](https://docs.cypress.io/api/commands/should).
@@ -207,13 +226,15 @@ There are numerous criteria that can be checked for. [Here](https://docs.cypress
 `cy.get('[data-cy="`_`data-cy-attribute-name`_`"]').should('have.text', 'Some text');`
 
 The first example asserts that the element is present in the DOM. The second one asserts that the number of elements in the DOM that have the `data-cy` attribute _`data-cy-attribute-name`_ assigned, is only one. The third one asserts that an element has exactly the text `Some text`. Any additional text in the element will lead to a failed assertion.
+
 ## .contains()
 
 Detailed description [here](https://docs.cypress.io/api/commands/contains).
 
-.contains() gets the DOM element containing the text specified in the brackets. DOM elements can contain _more_ than the desired text and still match.
+.contains() gets the DOM element containing the text specified in the brackets. DOM elements can contain *more* than the desired text and still match.
 
 `cy.get('[data-cy="`_`data-cy-attribute-name`_`"]').contains('Some text');`
+
 # Further Resources
 
 - [https://www.youtube.com/watch?v=5ajwAkZDbwo](https://www.youtube.com/watch?v=5ajwAkZDbwo)
