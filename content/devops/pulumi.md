@@ -2,4 +2,5 @@
 title: Pulumi
 homepage: https://www.pulumi.com/
 ---
-#git-ops #infrastructure-as-code #typescript #python 
+
+#git-ops #infrastructure-as-code #typescript #python
