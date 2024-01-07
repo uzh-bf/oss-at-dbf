@@ -9,9 +9,13 @@ homepage: https://www.llamaindex.ai/
 
 > LlamaIndex is a simple, flexible data framework for connecting custom data sources to large language models.
 >
-> _Source: https://www.llamaindex.ai/_
+> \_Source: https://www.llamaindex.ai/
 
-# Source Code
+# Examples
+
+#work-in-progress
+
+# Further Resources
 
 - https://github.com/run-llama/llama_index
 - https://github.com/run-llama/LlamaIndexTS
