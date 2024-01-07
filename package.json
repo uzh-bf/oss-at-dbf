@@ -1,15 +1,16 @@
 {
-  "name": "@jackyzha0/quartz",
-  "description": "🌱 publish your digital garden and notes as a website",
-  "private": true,
-  "version": "4.1.4",
+  "name": "@uzh-bf/oss",
+  "description": "Open Source at the Department of Banking and Finance, University of Zurich",
+  "version": "0.0.1",
   "type": "module",
-  "author": "jackyzha0 <j.zhao2k19@gmail.com>",
+  "maintainers": [
+    "Roland Schläfli <roland.schlaefli@bf.uzh.ch>"
+  ],
   "license": "MIT",
-  "homepage": "https://quartz.jzhao.xyz",
+  "homepage": "https://github.com/uzh-bf/oss-at-dbf",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jackyzha0/quartz.git"
+    "url": "https://github.com/uzh-bf/oss-at-dbf"
   },
   "scripts": {
     "docs": "npx quartz build --serve -d docs",
@@ -22,14 +23,7 @@
     "npm": ">=9.3.1",
     "node": ">=18.14"
   },
-  "keywords": [
-    "site generator",
-    "ssg",
-    "digital-garden",
-    "markdown",
-    "blog",
-    "quartz"
-  ],
+  "keywords": [],
   "bin": {
     "quartz": "./quartz/bootstrap-cli.mjs"
   },
