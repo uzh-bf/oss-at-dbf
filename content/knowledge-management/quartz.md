@@ -3,7 +3,7 @@ title: Quartz
 homepage: https://quartz.jzhao.xyz/
 ---
 
-#open-source #static-site-generator #markdown #react-js
+#open-source #static-site-generator [[react-js]] [[markdown]]
 
 # What is Quartz?
 

@@ -3,7 +3,7 @@ title: LlamaIndex
 homepage: https://www.llamaindex.ai/
 ---
 
-#AI #LLM #python #open-source #typescript
+#AI #LLM #open-source [[python]] [[languages/typescript|typescript]]
 
 # What is LlamaIndex?
 

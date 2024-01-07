@@ -3,7 +3,7 @@ title: LangChain
 homepage: https://www.langchain.com/
 ---
 
-#LLM #python #typescript #AI #open-source
+#LLM #AI #open-source [[python]] [[languages/typescript|typescript]]
 
 # What is LangChain?
 

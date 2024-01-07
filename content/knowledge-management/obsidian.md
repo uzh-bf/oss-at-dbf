@@ -3,7 +3,7 @@ title: Obsidian
 homepage: https://obsidian.md/
 ---
 
-#proprietary #markdown
+#proprietary [[markdown]]
 
 # What is Obsidian?
 

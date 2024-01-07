@@ -3,7 +3,7 @@ title: Budibase
 homepage: https://budibase.com/
 ---
 
-#open-source #low-code #no-code #javascript
+#open-source #low-code #no-code [[javascript]]
 
 # What is Budibase?
 
