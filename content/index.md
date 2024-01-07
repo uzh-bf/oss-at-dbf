@@ -7,7 +7,7 @@ Welcome to our developer knowledge base and project overview!
 # Goals of this Project
 
 - Sharing practical know-how with interested internal and external parties to reduce knowledge silos
-- Promoting open-source projects developed at our department (e.g., KlickerUZH) and at our university
+- Promoting open-source projects developed at our department (e.g., KlickerUZH) and at our university, as well as external open-source projects used/hosted by us
 - Enabling our developers to work on topics they are interested in and to publish their learnings
 
 # About our Department

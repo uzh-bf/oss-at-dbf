@@ -11,3 +11,11 @@ The design system simplifies the shared use of commonly used components in our w
 - The package can be imported from NPM via https://www.npmjs.com/package/@uzh-bf/design-system
 - The source code is available at https://github.com/uzh-bf/design-system
 - Examples for each component can be viewed at https://uzh-bf-design-system.vercel.app
+
+# Used In
+
+- [[automated-grading]]
+- [[klicker-uzh]]
+- [[gbl-uzh]]
+- [[thesis-platform]]
+- others...

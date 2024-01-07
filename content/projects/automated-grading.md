@@ -18,6 +18,7 @@ Our primary goal is to evaluate whether and how the correction of exams could be
 - [[languages/typescript|typescript]]
 - [[python]]
 - [[docker]]
+- [[design-system]]
 
 # Resources
 
