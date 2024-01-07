@@ -1,20 +1,23 @@
-# Quartz v4
+# OSS@DBF
 
-> “[One] who works with the door open gets all kinds of interruptions, but [they] also occasionally gets clues as to what the world is and what might be important.” — Richard Hamming
+Welcome to our developer knowledge base and project overview!
 
-Quartz is a set of tools that helps you publish your [digital garden](https://jzhao.xyz/posts/networked-thought) and notes as a website for free.
-Quartz v4 features a from-the-ground rewrite focusing on end-user extensibility and ease-of-use.
+## Goals of this Project
 
-**If you are looking for Quartz v3, you can find it on the [`hugo` branch](https://github.com/jackyzha0/quartz/tree/hugo).**
+- Sharing practical know-how with interested internal and external parties to reduce knowledge silos
+- Promoting open-source projects developed at our department (e.g., KlickerUZH) and at our university
+- Enabling our developers to work on topics they are interested in and to publish their learnings
 
-🔗 Read the documentation and get started: https://quartz.jzhao.xyz/
+## About the Department of Banking and Finance, UZH
 
-[Join the Discord Community](https://discord.gg/cRFFHYye7t)
+The Department of Banking and Finance (DBF) belongs to the leading departments in Europe for topics related to banking, finance, and insurance. It was founded in 1968 by the governing council of the canton of Zurich as "Institut für schweizerisches Bankwesen" (Swiss Banking Institute) as a part of the university of Zurich.
 
-## Sponsors
+> https://www.bf.uzh.ch/en/department/about-us.html
 
-<p align="center">
-  <a href="https://github.com/sponsors/jackyzha0">
-    <img src="https://cdn.jsdelivr.net/gh/jackyzha0/jackyzha0/sponsorkit/sponsors.svg" />
-  </a>
-</p>
+With more than 27'000 students, the University of Zurich is Switzerland's largest university. Founded in the year 1833, UZH was Europe's first university to be established by a democratic political system. Made up of seven faculties covering some 100 different subject areas, the University offers a wide variety of Bachelor's, Master's and PhD programs.
+
+> https://www.uzh.ch/cmsssl/en/explore/portrait/profile.html
+
+## License
+
+This repository is available under a permissive MIT license. Our projects are licensed separately and as stated within the corresponding repositories.
