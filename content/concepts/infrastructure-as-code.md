@@ -15,7 +15,7 @@ title: Infrastructure as Code (IaC)
 > - **Consistency:** By codifying environments, teams can ensure consistency across development, testing, and production environments.
 > - **Idempotency:** IaC configurations are typically idempotent, meaning they can be applied multiple times without changing the result beyond the initial application, ensuring reliable and predictable infrastructure state.
 >
-> Tools like [[terraform]], [[pulumi]], AWS CloudFormation, Ansible, Puppet, and Chef are commonly used for implementing Infrastructure as Code.
+> Tools like [[terraform]], [[pulumi]], AWS CloudFormation, [[ansible]], Puppet, and Chef are commonly used for implementing Infrastructure as Code.
 >
 > Source: GPT-4
 
