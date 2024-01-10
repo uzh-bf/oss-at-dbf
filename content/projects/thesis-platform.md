@@ -1,5 +1,5 @@
 ---
-title: Automated Grading
+title: Thesis Platform
 ---
 
 # Project Goal
