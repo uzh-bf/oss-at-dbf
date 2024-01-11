@@ -1,10 +1,6 @@
 ---
-title: Intro to Remotion
-author: Valentin Meyer
-date: 2023-04-20
+title: Remotion
 ---
-
-# What is Remotion?
 
 Remotion is a tool for video creation in react. The principle is simply rendering multiple images after another and thus creating a video. You can render, edit and export videos with just using react. Remotion provides a whole bunch of pre-built components which are ready to be used. Be sure to check out their website and documentation.
 

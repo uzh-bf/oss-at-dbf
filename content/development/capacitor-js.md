@@ -1,10 +1,6 @@
 ---
-title: Capacitor.js - Web Native Apps
-date: 2023-09-20
-author: Bulin Shaqiri
+title: Capacitor.js
 ---
-
-# Capacitor.js - Web Native Apps
 
 Capacitor is a cross-platform runtime that makes it easy to build web apps that run natively on iOS, Android, and the web. It provides a consistent, web-focused set of APIs that allows a web app to access native device features and functionality.
 
