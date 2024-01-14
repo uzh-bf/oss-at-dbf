@@ -510,6 +510,8 @@ It seems that push notifications are currently not supported on iOS ([https://ww
 
 ## Push Notifications
 
+> A more detailed article on push notifications is available [here](2023-04-27_push_notifications.md)
+
 - Google's explanation on how to send and receive push notifications:
 
 [https://www.youtube.com/watch?v=N9zpRvFRmj8](https://www.youtube.com/watch?v=N9zpRvFRmj8)
@@ -517,9 +519,13 @@ It seems that push notifications are currently not supported on iOS ([https://ww
 - MDN's expanation of how to send and receive push notifications:[https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Re-engageable_Notifications_Push](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Re-engageable_Notifications_Push)
 
 - Example with next-pwa and push notifications: [https://github.com/shadowwalker/next-pwa/tree/master/examples/web-push](https://github.com/shadowwalker/next-pwa/tree/master/examples/web-push)
-- How to turn a Webapp into a PWA? The bare minimum you need: 1) Use HTTPS 2) Your app needs to register a service worker with a fetch event handler (e.g. to deal with caching, have the site respond with 200 when the user is offline and send push notifications) 3) a manifest file with a set of home screen icons in different sizes (attention: specifying icons in the standard way might not work on older versions of iOS. Instead, logos need to be specified in the publig index.html)
+- How to turn a Webapp into a PWA? The bare minimum you need:
+  - 1) Use HTTPS
+  - 2) Your app needs to register a service worker with a fetch event handler (e.g. to deal with caching, have the site respond with 200 when the user is offline and send push notifications) 3) a manifest file with a set of home screen icons in different sizes (attention: specifying icons in the standard way might not work on older versions of iOS. Instead, logos need to be specified in the publig index.html)
 
 ## Publishing PWAs to App Stores
+
+> A more detailed article on publishing PWA is available [here](2023-05-05_publish_pwa.md)
 
 [https://www.youtube.com/watch?v=LELAuNihs18&t=1s](https://www.youtube.com/watch?v=LELAuNihs18&t=1s)
 

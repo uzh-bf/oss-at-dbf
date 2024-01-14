@@ -1,5 +1,5 @@
 ---
-title: Kustomize
+title: Helmfile
 homepage: https://github.com/roboll/helmfile
 ---
 
