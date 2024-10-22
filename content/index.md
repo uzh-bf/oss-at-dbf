@@ -12,14 +12,14 @@ Welcome to our developer knowledge base and project overview.
 
 # Latest Projects and Articles
 
-|  Projects     |   Articles    |
-|  ---  |  ---  |
-|   [Automated Grading](projects/automated-grading.md)    |   [Progressive Web Apps](articles/2023-05-12_progressive_web_apps.md)    |
-|    [Design System](projects/design-system.md)   |   [Intro to Github Actions](articles/2023-04-26_intro_github_actions.md)    |
-|     [EscapeUZH](projects/escape-uzh.md)  |   [Testing Web Apps with Cypress](articles/2022-12-30_testing_web_apps.md)    |
-|     [GBL@UZH](projects/gbl-uzh.md)  |     [NLP with Python](articles/2022-12-30_nlp_with_python.md)  |
-|     [KlickerUZH](projects/klicker-uzh.md)  |       |
-|     [Thesis Platform](projects/thesis-platform.md)  |       |
+| Projects                                           | Articles                                                                 |
+| -------------------------------------------------- | ------------------------------------------------------------------------ |
+| [Automated Grading](projects/automated-grading.md) | [Progressive Web Apps](articles/2023-05-12_progressive_web_apps.md)      |
+| [Design System](projects/design-system.md)         | [Intro to Github Actions](articles/2023-04-26_intro_github_actions.md)   |
+| [EscapeUZH](projects/escape-uzh.md)                | [Testing Web Apps with Cypress](articles/2022-12-30_testing_web_apps.md) |
+| [GBL@UZH](projects/gbl-uzh.md)                     | [NLP with Python](articles/2022-12-30_nlp_with_python.md)                |
+| [KlickerUZH](projects/klicker-uzh.md)              |                                                                          |
+| [Thesis Platform](projects/thesis-platform.md)     |                                                                          |
 
 # About our Department
 
