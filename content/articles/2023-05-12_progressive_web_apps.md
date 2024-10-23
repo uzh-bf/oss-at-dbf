@@ -520,8 +520,8 @@ It seems that push notifications are currently not supported on iOS ([https://ww
 
 - Example with next-pwa and push notifications: [https://github.com/shadowwalker/next-pwa/tree/master/examples/web-push](https://github.com/shadowwalker/next-pwa/tree/master/examples/web-push)
 - How to turn a Webapp into a PWA? The bare minimum you need:
-  - 1) Use HTTPS
-  - 2) Your app needs to register a service worker with a fetch event handler (e.g. to deal with caching, have the site respond with 200 when the user is offline and send push notifications) 3) a manifest file with a set of home screen icons in different sizes (attention: specifying icons in the standard way might not work on older versions of iOS. Instead, logos need to be specified in the publig index.html)
+  - 1. Use HTTPS
+  - 2. Your app needs to register a service worker with a fetch event handler (e.g. to deal with caching, have the site respond with 200 when the user is offline and send push notifications) 3) a manifest file with a set of home screen icons in different sizes (attention: specifying icons in the standard way might not work on older versions of iOS. Instead, logos need to be specified in the publig index.html)
 
 ## Publishing PWAs to App Stores
 
