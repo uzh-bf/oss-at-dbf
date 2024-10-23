@@ -648,7 +648,3 @@ export default function SkillInput() {
   )
 }
 ```
-
-## 4. Internationalization
-
-COMING SOON
