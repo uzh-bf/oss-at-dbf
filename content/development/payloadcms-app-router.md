@@ -648,3 +648,11 @@ export default function SkillInput() {
   )
 }
 ```
+
+## Useful Resources
+
+- Internationalization: https://next-intl-docs.vercel.app/docs/getting-started/app-router/with-i18n-routing
+- Payload CMS: https://payloadcms.com/
+- NextJS Documentation: https://nextjs.org/
+- SWR Client-Side Caching: https://swr.vercel.app/
+- Server-Side Caching: https://nextjs.org/docs/app/api-reference/functions/unstable_cache
