@@ -1,6 +1,6 @@
 # Payload CMS & NextJS App Router
 
-This article briefly describes the setup of the `elearning` @DF repository, which is based on [Payload CMS](https://payloadcms.com/) and [NextJS](https://nextjs.org/), and some relevant lessons learned during its development. The main advantages of this setup are a shared NextJS app between the content management system (CMS) and the client application, allowing to provide features like a live preview of the content.
+This article briefly describes the setup of the `elearning` @DF repository, which is based on [Payload CMS](https://payloadcms.com/) and [NextJS](https://nextjs.org/), and some relevant lessons learned during its development. The main advantage of this setup is a shared NextJS app between the content management system (CMS) and the client application, allowing the provision of features like a live preview of the content.
 
 An alternative example for a similar setup is [Netlify CMS](https://www.netlify.com/) (used in the background of [https://www.div.uzh.ch](https://www.div.uzh.ch)). However, since Netlify stores its data in simple Markdown files (through Git access and commits to the repository), it is not as powerful as Payload CMS.
 
@@ -8,7 +8,7 @@ Disclaimer: The code snippets in this article are not from a real project and mi
 
 ## 1. Payload CMS
 
-Common CMS setups rely on a database to store content and two separate frontends. While the first frontend is what is usually known as the CMS and is used to manage the content, the second frontend is the actual client application that displays the content to the end-users. Payload CMS does not follow this pattern, but combines the CMS and the client application into a single app instead, adding end-to-end Typescript support, live preview, and other features.
+Common CMS setups rely on a database to store content and two separate frontends. While the first frontend covers what is usually known as the CMS and is used to manage the content, the second frontend is the actual client application that displays the content to the end-users. Payload CMS does not follow this pattern, but combines the CMS and the client application into a single app instead, adding end-to-end Typescript support, live preview, and other features.
 
 ### Concept (Single App Setup)
 
@@ -18,11 +18,11 @@ Figure 1: Illustration of Payload CMS setup
 
 ### Structure & Type-Safety
 
-As already mentioned in the introduction and illustrated in Figure 1, the shared NextJS application allows for the seemless integration of the CMS and the client application. Shared access to the same SQL database adds possibilities to design an interactive client application, which would not be possible with simpler approaches like the Markdown-based Netlify CMS.
+As already mentioned in the introduction and illustrated in Figure 1, the shared NextJS application allows for the seamless integration of the CMS and the client application. Shared access to the same SQL database adds possibilities to design an interactive client application, which would not be possible with simpler approaches like the Markdown-based Netlify CMS.
 
-In the codebase, payload and the client application are separated into two directories according to the structure shown below. The database schema is defined through the `payload.config.ts` file, which imports the necessary information for the tables from the `collections` folder in our setup. Since Payload is using [Drizzle](https://orm.drizzle.team/) behind the scenes, it also natively supports migrations. In the connection with data seeding, the code needs to be carefully designed in order to avoid the deletion of existing data (see [data seeding section](#data-seeding)).
+In the codebase, payload and the client application are separated into two directories according to the structure shown below. The database schema is defined through the `payload.config.ts` file, which imports the necessary information for the tables described in the `collections` folder in our setup. Since Payload is using [Drizzle](https://orm.drizzle.team/) behind the scenes, it also natively supports SQL database migrations. In the connection with data seeding, the code needs to be carefully designed in order to avoid the deletion or invalidation of existing data (see [data seeding section](#data-seeding)).
 
-Type-safety will be automatically provided by Payload through the use of its [local API](#frontend-queries) for querying in the client applicaiton and the enforced structure for the definition of collections.
+Type-safety will be automatically provided by Payload through the use of its [local API](#frontend-queries) for querying in the client application and the enforced structure for the definition of collections.
 
 ```plaintext
 src
@@ -47,13 +47,13 @@ src
 
 ### Collections & Database Structure
 
-In Payload CMS applcations, collections are used to define the structure of the database tables and the fields thereon. In addition to the standard SQL database fields, Payload also supports numerous [custom fields](https://payloadcms.com/docs/fields/overview). Most of these fields do not have an equivalent representation in SQL databases, wherefore payload creates additional tables with relations between them in the background. This can lead to challenges when seeding / querying / modifying data and needs to be carefully considered. Inspecting the created database structure through tools like [DataGrip](https://www.jetbrains.com/datagrip/) is highly recommended. To connect to the database, the following configuration can be used:
+In Payload CMS applications, collections are used to define the structure of the database tables and the fields therein. In addition to the standard SQL database fields, Payload also supports numerous [custom fields](https://payloadcms.com/docs/fields/overview). Most of these fields do not have an equivalent representation in SQL databases, wherefore Payload creates additional tables with relations between them in the background. This can lead to challenges when seeding/querying/modifying data and needs to be carefully considered. Inspecting the created database structure through tools like [DataGrip](https://www.jetbrains.com/datagrip/) is highly recommended. To connect to the database, the following configuration can be used:
 
 <img src="./resources/payloadcms_database_connection.png" alt="database-setup" width="700">
 
 Figure 2: Database connection setup in DataGrip
 
-An example persons collection with a string name, a number age, an array field of skills (with a string name and number level) and a relation to a children collection could look like this:
+An example persons collection with a string name, a number age, an array field of hobbies (with a string name and number level) and a relation to a children collection could look like this:
 
 ```typescript
 // collections/persons.ts
@@ -85,7 +85,7 @@ export const Persons: CollectionConfig = {
       required: true,
     },
     {
-      name: "skills",
+      name: "hobbies",
       type: "array",
       fields: [
         {
@@ -112,7 +112,7 @@ export const Persons: CollectionConfig = {
 export default Persons
 ```
 
-In the database structure, a new table will be created that includes the `id`, `name` and `age` of each person. Behind the scenes, Payload will create a separate table with all `skills` of one person, creating separate entries for each skill, all linked to the person through its `id`.
+In the database structure, a new table will be created that includes the `id`, `name` and `age` of each person. Behind the scenes, Payload will create a separate table with all `hobbies` of one person, creating entries for each hobby, all linked to the person through its `id`.
 
 All collections that should be created as tables in the database by Payload then have to be included in the `payload.config.ts` file, which also includes configuration properties for the lexical editor (richtext support), the database connection settings, and more:
 
@@ -169,13 +169,13 @@ Whenever a collection is modified and Payload is running in development mode, th
 
 Payload natively also supports localization and versioning. To activate localization, it is sufficient to simply add a prop `localized: true` to the corresponding collection property. In the background, payload will then create a separate table `persons_locales` (if a localized prop has been added to the `persons` collection), which contains all the attributes with multiple language values.
 
-Similarly, Payload automatically takes care of a rigorous versioning logic, allowing to switch back to previously published versions of the same content through the CMS interface. The corresponding data ist stored in separate tables with a `_v` suffix.
+Similarly, Payload automatically takes care of rigorous versioning logic, allowing switching back to previously published versions of the same content through the CMS interface. The corresponding data is stored in separate tables with a `_v` suffix.
 
 ### Migrations
 
 When an application with a Payload CMS has been deployed, changes to the database schema should be done through migrations. Through its use of `Drizzle`, Payload provides a simple interface to create and run migrations.
 
-However, it is important to mention that not only the SQL migration and their execution order are tracked, but that a complete copy of the database schema at this point in time is stored alongside the migration. This copy is used to identify changes between two successive migrations and create new ones. It is therefore essential to ensure that the migrations are merged into the developement / main branch in the correct order and fully sequentially. Otherwise, it is possible that a later migration re-adds some of the migration steps to the SQL migration file and cause errors during application.
+However, it is important to mention that not only the SQL migration and their execution order are tracked, but that a complete copy of the database schema at this point in time is stored alongside the migration. This copy is used to identify changes between two successive migrations and create new ones. It is therefore essential to ensure that the migrations are merged into the developement / main branch in the correct order and fully sequentially. Otherwise, it is possible that a later migration re-adds some of the migration steps to the SQL migration file and causes errors during application.
 
 To list all the existing migrations and check which of them have already been applied to the database, run the following command:
 
@@ -197,7 +197,7 @@ pnpm run payload migrate:create <migration-name>
 
 ### Relations & Hooks
 
-At the point of writing payload only supports one-directional relations, which can be specified as shown in section [Collections & Database Structure](#collections--database-structure). To create bi-directional relations, one-directional relations need to be defined for both considered collections and a custom hook (called `updateRelationshipRefs` is required to keep them in sync).
+At the time of writing, Payload only supports one-directional relations, which can be specified as shown in section [Collections & Database Structure](#collections--database-structure). To create bi-directional relations, one-directional relations need to be defined for both considered collections and a custom hook (called `updateRelationshipRefs`) is required to keep them in sync.
 
 More generally, Payload supports a significant range of hooks that can be specified as part of the collections and run in certain cases. They can be used to update derived data that should be stored in the database for simplified querying or to update related tables with new data.
 
@@ -300,7 +300,7 @@ await localApi.update({
 
 When seeding data into a database that is running behind a payload CMS, it is very important to closely pay attention to the logic that is required for incremental seeding. Only collections defined as such in the `payload.config.ts` file will be assigned an id that can be used for reference during querying / updating. Entries in derived tables (such as lines in an `array` or `block` field) are assigned ids behind the scenes, but are exposed as nullable fields and cannot be set during the seeding process.
 
-Accordingly, if these ids are used in some context, for example to track skills that children have learned form their parents (while `skills` are defined as an `array` field on the `persons` collection), the seeding logic needs to track additional identifiers or requires custom hooks that update the linked entries based on the previous and new documents. In the context of the `eLearning` application, this applies for exmample to the tracking of `learning objectives` stored on the `course-units` collection and their completion tracked on the `students` collection.
+Accordingly, if these ids are used in some context, for example to track hobbies that children have learned form their parents (while `hobbies` are defined as an `array` field on the `persons` collection), the seeding logic needs to track additional identifiers or requires custom hooks that update the linked entries based on the previous and new documents. In the context of the `eLearning` application, this applies for exmample to the tracking of `learning objectives` stored on the `course-units` collection and their completion tracked on the `students` collection.
 
 ## 2. NextJS App Router
 
@@ -308,17 +308,9 @@ Accordingly, if these ids are used in some context, for example to track skills 
 
 The main concept that needs to be understood when working with the new NextJS App directory is the clear separation of server and client components. By default, any component that does not have anything else specified will be rendered as a server component, which are sent in a rendered format to the client and do not allow for any interaction.
 
-Client components on the other hand, marked through `use client` at the top of the file are rendered on the client, can include hooks and other client-side logic, but cannot access the database or any other server-side logic and resources. This clear separation allows for a more efficient rendering of the application and a better user experience.
+Client components on the other hand, marked through `use client` at the top of the file, are rendered on the client, can include client-side logic (including interactions), but cannot access the database or any other server-side logic and resources. This clear separation allows for a more efficient rendering of the application and a better user experience.
 
 ### Routing & Layouts
-
-![](./resources/payload_next_structure.png)
-
-Figure 3: NextJS App directory structure (Soruce: NextJS Documentation)
-
-Pages that should be reachable through a corresponding route need to be defined within the `app` directory as `page.tsx`. The folder structure that leads to this file determines the path under which the page will be reachable. In addition to the page itself, the app directory also supports the use of several additional components that are rendered around the page and nested for hierarchical folder structures (Figure 3). This allows for minimal updates when switching to a different page further down the tree and to minimize the amount of required updates.
-
-Similar to the pages router, the app router still supports dynamics routes. On the `page.tsx` component itself, the corresponding parameters are directly available as `props`. On client components included on the page, all parameters can be accessed through the `useParams` hook (manual typing required). For server components that are included on the page, the required parameters needs to be passed down.
 
 ```plaintext
 src
@@ -331,8 +323,16 @@ src
 │   |   |   |   |   ├── layout.tsx
 ├── components
 │   ├── Person.tsx
-│   ├── SkillInput.tsx
+│   ├── HobbyInput.tsx
 ```
+
+Pages that should be reachable through a corresponding route need to be defined within the `app` directory as `page.tsx`. The folder structure that leads to this file determines the path under which the page will be reachable. In addition to the page itself, the app directory also supports the use of several additional components that are rendered around the page and nested for hierarchical folder structures (Figure 3). This allows for minimal updates when switching to a different page further down the tree and to minimize the amount of required updates.
+
+![](./resources/payload_next_structure.png)
+
+Figure 3: NextJS App directory structure (Source: NextJS Documentation)
+
+Similar to the pages router, the app router still supports dynamics routes. On the `page.tsx` component itself, the corresponding parameters are directly available as `props`. On client components included on the page, all parameters can be accessed through the `useParams` hook (manual typing required). For server components that are included on the page, the required parameters need to be passed down.
 
 ```typescript
 // (app)/(content)/person/[id]/layout.tsx
@@ -399,22 +399,22 @@ export default function Person({ age }: { age: number }) {
 ```
 
 ```typescript
-// components/SkillInput.tsx
+// components/HobbyInput.tsx
 'use client'
 
-export default function SkillInput() {
-  const [skill, setSkill] = useState("")
+export default function HobbyInput() {
+  const [hobby, setHobby] = useState("")
 
   // ✅ useParams available in client components
   const { id } = useParams<{id: string}>()
 
   return (
     <div>
-      <div>Skills of Person {id}</div>
+      <div>Hobbies of Person {id}</div>
       <input
         type="text"
-        value={skill}
-        onChange={(e) => setSkill(e.target.value)}
+        value={hobby}
+        onChange={(e) => setHobby(e.target.value)}
       />
     </div>
   )
@@ -423,13 +423,13 @@ export default function SkillInput() {
 
 ### Server Actions
 
-For users to be able to interact with the application, it is essantial that user actions can trigger changes in the database. To achieve this, the server actions need to be defined in the `src/app/actions` directory. These actions can then be called from the client components and will be executed on the server. The result of the action can then be passed back to the client and used to update the UI.
+For users to be able to interact with the application, it is essential that user actions can trigger changes in the database. To achieve this, the server actions need to be defined in the `src/app/actions` directory. These actions can then be called from the client components and will be executed on the server. The result of the action can then be passed back to the client and used to update the UI.
 
 ```typescript
-// src/app/actions/addSkill.ts
+// src/app/actions/addHobby.ts
 "use server"
 
-export async function addSkill({ personId, hobby }: { personId: string; hobby: string }) {
+export async function addHobby({ personId, hobby }: { personId: string; hobby: string }) {
   const person = await localApi.findByID({
     collection: "persons",
     id: personId,
@@ -441,7 +441,7 @@ export async function addSkill({ personId, hobby }: { personId: string; hobby: s
     collection: "persons",
     id,
     data: {
-      skills: [...person.hobbies, { name: hobby }],
+      hobbies: [...person.hobbies, { name: hobby }],
     },
   })
 
@@ -452,22 +452,22 @@ export async function addSkill({ personId, hobby }: { personId: string; hobby: s
 These functions can then be called from client components to update the data stored in the database:
 
 ```typescript
-// components/SkillInput.tsx
-import { addSkill } from "~/app/actions/addSkill"
+// components/HobbyInput.tsx
+import { addHobby } from "~/app/actions/addHobby"
 
-export default function SkillInput() {
-  const [skill, setSkill] = useState("")
+export default function HobbyInput() {
+  const [hobby, setHobby] = useState("")
   const { id } = useParams<{id: string}>()
 
   return (
     <div>
-      <div>Add new Skill for Person {id}</div>
+      <div>Add new Hobby for Person {id}</div>
       <input
         type="text"
-        value={skill}
-        onChange={(e) => setSkill(e.target.value)}
+        value={hobby}
+        onChange={(e) => setHobby(e.target.value)}
       />
-      <button onClick={() => addSkill({ personId: id, skill })}>Add Skill</button>
+      <button onClick={() => addHobby({ personId: id, hobby })}>Add Hobby</button>
     </div>
   )
 }
@@ -475,7 +475,7 @@ export default function SkillInput() {
 
 ## 3. Caching
 
-To increase the efficiency of the app and make use of server side rendering and caching wherever possible, server-side and client-side caching techniques have been successfully combined in the `eLearning` project. For server-side caching, the `unstable_cache` by NextJS is used in combination with `useSWR` for client side caching.
+To increase the efficiency of the app and make use of server-side rendering and caching wherever possible, server-side and client-side caching techniques have been successfully combined in the `eLearning` project. For server-side caching, the `unstable_cache` by NextJS is used in combination with `useSWR` for client side caching.
 
 ### Server-Side Caching
 
@@ -530,12 +530,12 @@ export default function PersonPage({ personId: number }) {
 To invalidate the cached data, the `revalidateTag` function can be called from the server functions where the persons entry is modified (snippet 1) and in the `afterChange` hook on the payload collection (snippet 2).
 
 ```typescript
-// src/app/actions/addSkill.ts
+// src/app/actions/addHobby.ts
 "use server"
 
-import { revalidateTag } from `next/cache`
+import { revalidateTag } from "next/cache"
 
-export async function addSkill({ personId, hobby }: { personId: string; hobby: string }) {
+export async function addHobby({ personId, hobby }: { personId: string; hobby: string }) {
   [...]
 
   // ✅ invalidate cache
@@ -569,7 +569,7 @@ export default Persons
 
 ### Client-Side Caching
 
-To cache the fetched course data locally on the client, the following code can be used. The `useSWR` hook will automatically fetch the data from the server and store it until the specified `tag` has been invalidated, triggering a refetch of the data (similar to server-side caching, tags are not synchronized though).
+To cache the fetched course data locally on the client, the following code can be used. The `useSWR` hook will automatically fetch the data from the server and store it until the specified `tag` has been invalidated, triggering a refetch of the data (similar to server-side caching; tags are not synchronized between the caches).
 
 ```typescript
 // app/actions/useCachedPerson.ts
@@ -613,19 +613,19 @@ export default function Person() {
 }
 ```
 
-In order to properly update the SWR cache after changes through the end-user, the mutation action is typically called within a `useSWRMigration` hook, which will automatically update the cache after the mutation has been executed.
+In order to properly update the SWR cache after changes through the end-user, the mutation action is typically called within a `useSWRMigration` hook, which will automatically invalidate or update the cache after the mutation has been executed.
 
 ```typescript
-// components/SkillInput.tsx
-import { addSkill } from "~/app/actions/addSkill"
+// components/HobbyInput.tsx
+import { addHobby } from "~/app/actions/addHobby"
 
-export default function SkillInput() {
-  const [skill, setSkill] = useState("")
+export default function HobbyInput() {
+  const [hobby, setHobby] = useState("")
   const { id } = useParams<{id: string}>()
 
-  const { trigger: triggerAddSkill } = useSWRMutation(
-    'addSkill',
-    addSkill,
+  const { trigger: triggerAddHobby } = useSWRMutation(
+    'addHobby',
+    addHobby,
     {
       onSuccess: () => {
         // ✅ invalidate cache
@@ -636,14 +636,14 @@ export default function SkillInput() {
 
   return (
     <div>
-      <div>Add new Skill for Person {id}</div>
+      <div>Add new Hobby for Person {id}</div>
       <input
         type="text"
-        value={skill}
-        onChange={(e) => setSkill(e.target.value)}
+        value={hobby}
+        onChange={(e) => setHobby(e.target.value)}
       />
       {/* // ✅ trigger SWR mutation instead of server action directly */}
-      <button onClick={() => triggerAddSkill({ personId: id, skill })}>Add Skill</button>
+      <button onClick={() => triggerAddHobby({ personId: id, hobby })}>Add Hobby</button>
     </div>
   )
 }
